@@ -1,7 +1,6 @@
 ﻿using Domain.Models.Blogs;
 using Domain.Models.Blogs.Categories;
 using Domain.Models.Blogs.Documents;
-using Domain.Models.Blogs.For;
 using Domain.Models.Blogs.Meta;
 using Domain.Models.Blogs.ParagraphDocuments;
 using Domain.Models.Blogs.Paragraphs;
