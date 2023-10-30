@@ -1,7 +1,9 @@
-﻿using Application.Contracts.Courses;
+﻿using Application.Contracts.Blogs;
+using Application.Contracts.Courses;
 using Application.Contracts.Menus;
 using Application.Contracts.UserLogins;
 using AutoMapper;
+using Domain.Models.Blogs;
 using Domain.Models.Courses;
 using Domain.Models.Courses.Categories;
 using Domain.Models.Courses.CategoriesSilders;
@@ -42,6 +44,13 @@ public class MappingProfile : Profile
         CreateMap<User, UserDetailsDto>();
         CreateMap<UserLogin, UserDetailsDto>();
         CreateMap<UserDevice, UserDetailsDto>();
+
+        //-------Blog Table --------------------------
+
+        CreateMap<Blog, BlogDto>();
+        CreateMap<CreateBlogDto, Blog>();
+        CreateMap<BlogDto, Blog>();
+        CreateMap<UpdateBlogDto, Blog>();
 
     }
 }

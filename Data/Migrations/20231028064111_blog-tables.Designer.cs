@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231027155101_mukesCode-Backup")]
-    partial class mukesCodeBackup
+    [Migration("20231028064111_blog-tables")]
+    partial class blogtables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,246 @@ namespace Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Domain.Models.Blogs.Blog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("AuthorId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CategoryId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ReaderHint")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ThumbImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TotalPracticeTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("TotalReadTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UpdatedId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Blogs");
+                });
+
+            modelBuilder.Entity("Domain.Models.Blogs.Categories.BlogCategorie", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SubTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UpdatedId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BlogCategories");
+                });
+
+            modelBuilder.Entity("Domain.Models.Blogs.Documents.BlogDocument", b =>
+                {
+                    b.Property<int?>("DocumentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("BlogId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DocumentId", "BlogId");
+
+                    b.HasIndex("BlogId");
+
+                    b.ToTable("BlogDocuments");
+                });
+
+            modelBuilder.Entity("Domain.Models.Blogs.Meta.BlogMeta", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("BlogId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Keyword")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogId");
+
+                    b.ToTable("BlogMetas");
+                });
+
+            modelBuilder.Entity("Domain.Models.Blogs.ParagraphDocuments.BlogParagraphDocument", b =>
+                {
+                    b.Property<int?>("DocumentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("BlogParagraphId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DocumentId", "BlogParagraphId");
+
+                    b.HasIndex("BlogParagraphId");
+
+                    b.ToTable("BlogParagraphDocuments");
+                });
+
+            modelBuilder.Entity("Domain.Models.Blogs.Paragraphs.BlogParagraph", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("AuthorId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("BlogId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("OrderNo")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SubTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UpdatedId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("BlogId");
+
+                    b.ToTable("BlogParagraphs");
+                });
 
             modelBuilder.Entity("Domain.Models.Coupons.Coupon", b =>
                 {
@@ -108,6 +348,31 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CouponTypes");
+                });
+
+            modelBuilder.Entity("Domain.Models.Courses.Blogs.CoursesBlog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("BlogId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CourseId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogId");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("CoursesBlogs");
                 });
 
             modelBuilder.Entity("Domain.Models.Courses.Categories.CourseCategory", b =>
@@ -313,6 +578,34 @@ namespace Data.Migrations
                     b.HasIndex("DocumentId", "CourseId");
 
                     b.ToTable("CourseDocuments");
+                });
+
+            modelBuilder.Entity("Domain.Models.Courses.FeeDetails.CourseFeeDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Discount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("FeeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FeeId");
+
+                    b.ToTable("CourseFeeDetails");
                 });
 
             modelBuilder.Entity("Domain.Models.Courses.Levels.CourseLevel", b =>
@@ -1012,6 +1305,68 @@ namespace Data.Migrations
                     b.ToTable("UserDevices");
                 });
 
+            modelBuilder.Entity("Domain.Models.Users.Lectures.Logs.UserLectureLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("From")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("To")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UserLectureId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserLectureId");
+
+                    b.ToTable("UserLectureLogs");
+                });
+
+            modelBuilder.Entity("Domain.Models.Users.Lectures.UserLecture", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("ComplateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("LectureId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UserId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LectureId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserLectures");
+                });
+
             modelBuilder.Entity("Domain.Models.Users.Logins.UserLogin", b =>
                 {
                     b.Property<int>("Id")
@@ -1054,6 +1409,25 @@ namespace Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserLogins");
+                });
+
+            modelBuilder.Entity("Domain.Models.Users.Sales.Payments.SalePayment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("SaleId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SaleId");
+
+                    b.ToTable("SalePayments");
                 });
 
             modelBuilder.Entity("Domain.Models.Users.Sales.ProdectCoupons.SaleProdectCoupon", b =>
@@ -1328,6 +1702,89 @@ namespace Data.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Domain.Models.Blogs.Blog", b =>
+                {
+                    b.HasOne("Domain.Models.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
+
+                    b.HasOne("Domain.Models.Courses.Categories.CourseCategory", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Models.Blogs.Documents.BlogDocument", b =>
+                {
+                    b.HasOne("Domain.Models.Blogs.Blog", "Blog")
+                        .WithMany()
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Models.Documents.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Blog");
+
+                    b.Navigation("Document");
+                });
+
+            modelBuilder.Entity("Domain.Models.Blogs.Meta.BlogMeta", b =>
+                {
+                    b.HasOne("Domain.Models.Blogs.Blog", "Blog")
+                        .WithMany()
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Blog");
+                });
+
+            modelBuilder.Entity("Domain.Models.Blogs.ParagraphDocuments.BlogParagraphDocument", b =>
+                {
+                    b.HasOne("Domain.Models.Blogs.Paragraphs.BlogParagraph", "BlogParagraph")
+                        .WithMany()
+                        .HasForeignKey("BlogParagraphId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Models.Documents.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BlogParagraph");
+
+                    b.Navigation("Document");
+                });
+
+            modelBuilder.Entity("Domain.Models.Blogs.Paragraphs.BlogParagraph", b =>
+                {
+                    b.HasOne("Domain.Models.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
+
+                    b.HasOne("Domain.Models.Blogs.Blog", "Blog")
+                        .WithMany()
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Blog");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Domain.Models.Coupons.Coupon", b =>
                 {
                     b.HasOne("Domain.Models.Coupons.Types.CouponType", "CouponType")
@@ -1335,6 +1792,25 @@ namespace Data.Migrations
                         .HasForeignKey("TypeId");
 
                     b.Navigation("CouponType");
+                });
+
+            modelBuilder.Entity("Domain.Models.Courses.Blogs.CoursesBlog", b =>
+                {
+                    b.HasOne("Domain.Models.Blogs.Blog", "Blog")
+                        .WithMany()
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Models.Courses.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Blog");
+
+                    b.Navigation("Course");
                 });
 
             modelBuilder.Entity("Domain.Models.Courses.Categories.CourseCategory", b =>
@@ -1442,6 +1918,15 @@ namespace Data.Migrations
                     b.Navigation("Course");
 
                     b.Navigation("Document");
+                });
+
+            modelBuilder.Entity("Domain.Models.Courses.FeeDetails.CourseFeeDetail", b =>
+                {
+                    b.HasOne("Domain.Models.Fees.CourseFee", "CourseFee")
+                        .WithMany()
+                        .HasForeignKey("FeeId");
+
+                    b.Navigation("CourseFee");
                 });
 
             modelBuilder.Entity("Domain.Models.Documents.Document", b =>
@@ -1633,6 +2118,36 @@ namespace Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Domain.Models.Users.Lectures.Logs.UserLectureLog", b =>
+                {
+                    b.HasOne("Domain.Models.Users.Lectures.UserLecture", "UserLecture")
+                        .WithMany()
+                        .HasForeignKey("UserLectureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserLecture");
+                });
+
+            modelBuilder.Entity("Domain.Models.Users.Lectures.UserLecture", b =>
+                {
+                    b.HasOne("Domain.Models.Lectures.Lecture", "Lecture")
+                        .WithMany()
+                        .HasForeignKey("LectureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Models.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Lecture");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Domain.Models.Users.Logins.UserLogin", b =>
                 {
                     b.HasOne("Domain.Models.Users.User", "User")
@@ -1642,6 +2157,17 @@ namespace Data.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Models.Users.Sales.Payments.SalePayment", b =>
+                {
+                    b.HasOne("Domain.Models.Users.Sales.Sale", "Sale")
+                        .WithMany()
+                        .HasForeignKey("SaleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Sale");
                 });
 
             modelBuilder.Entity("Domain.Models.Users.Sales.ProdectCoupons.SaleProdectCoupon", b =>

@@ -1,10 +1,12 @@
 using Application.Configrations;
 using Data;
+using Data.Blogs;
 using Data.Courses;
 using Data.Menus;
 using Data.Users;
 using Data.Users.Dervices;
 using Data.Users.Logins;
+using Domain.Models.Blogs;
 using Domain.Models.Courses;
 using Domain.Models.Menus;
 using Domain.Models.Users;
@@ -122,6 +124,7 @@ builder.Services.AddScoped<ICourseRepository, CourseRepoitory>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserLoginRepository, UserLoginRepository>();
 builder.Services.AddScoped<IUserDerviceRepository, UserDerviceRepository>();
+builder.Services.AddScoped<IBlogRepository, BlogRepository>();
 builder.Services.AddTransient<EmailService>();
 
 

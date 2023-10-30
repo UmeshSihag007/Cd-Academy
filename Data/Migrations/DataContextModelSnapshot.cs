@@ -1302,7 +1302,7 @@ namespace Data.Migrations
                     b.ToTable("UserDevices");
                 });
 
-            modelBuilder.Entity("Domain.Models.Users.Lectures.Logs.UserLectureLog", b =>
+            modelBuilder.Entity("Domain.Models.Users.Lectures.LectureLogs.UserLectureLogs", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1319,8 +1319,7 @@ namespace Data.Migrations
                     b.Property<DateTime>("To")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("UserLectureId")
-                        .IsRequired()
+                    b.Property<int>("UserLectureId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -2115,7 +2114,7 @@ namespace Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Domain.Models.Users.Lectures.Logs.UserLectureLog", b =>
+            modelBuilder.Entity("Domain.Models.Users.Lectures.LectureLogs.UserLectureLogs", b =>
                 {
                     b.HasOne("Domain.Models.Users.Lectures.UserLecture", "UserLecture")
                         .WithMany()

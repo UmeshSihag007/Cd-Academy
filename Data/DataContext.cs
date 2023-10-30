@@ -34,7 +34,7 @@ using Domain.Models.Menus.Types;
 using Domain.Models.Users;
 using Domain.Models.Users.Devices;
 using Domain.Models.Users.Lectures;
-using Domain.Models.Users.Lectures.Logs;
+using Domain.Models.Users.Lectures.LectureLogs;
 using Domain.Models.Users.Logins;
 using Domain.Models.Users.Sales;
 using Domain.Models.Users.Sales.Payments;
@@ -92,19 +92,19 @@ public class DataContext : DbContext
     public DbSet<UserLecture> UserLectures => Set<UserLecture>();
     public DbSet<UserLectureLog> UserLectureLogs => Set<UserLectureLog>();
     public DbSet<BlogCategorie> BlogCategories => Set<BlogCategorie>();
-    public DbSet<Blog>  Blogs => Set<Blog>();
-    public DbSet<BlogDocument>  BlogDocuments => Set<BlogDocument>();
-    public DbSet<BlogParagraph>  BlogParagraphs => Set<BlogParagraph>();
-    public DbSet<BlogParagraphDocument>  BlogParagraphDocuments => Set<BlogParagraphDocument>();
-    public DbSet<BlogMeta>  BlogMetas => Set<BlogMeta>();
-    public DbSet<CoursesBlog>  CoursesBlogs => Set<CoursesBlog>();
-    public DbSet<CourseFeeDetail>  CourseFeeDetails => Set<CourseFeeDetail>();
+    public DbSet<Blog> Blogs => Set<Blog>();
+    public DbSet<BlogDocument> BlogDocuments => Set<BlogDocument>();
+    public DbSet<BlogParagraph> BlogParagraphs => Set<BlogParagraph>();
+    public DbSet<BlogParagraphDocument> BlogParagraphDocuments => Set<BlogParagraphDocument>();
+    public DbSet<BlogMeta> BlogMetas => Set<BlogMeta>();
+    public DbSet<CoursesBlog> CoursesBlogs => Set<CoursesBlog>();
+    public DbSet<CourseFeeDetail> CourseFeeDetails => Set<CourseFeeDetail>();
 
 
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly()); 
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
 }

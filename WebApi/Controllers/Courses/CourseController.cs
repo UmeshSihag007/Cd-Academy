@@ -103,26 +103,40 @@ public class CourseController : ControllerBase
     public async Task<ActionResult<List<SaleCourseDetailsDto>>> GetSaleCourseByUserId(int userId)
     {
         var data = await _courseRepository.GetSaleCourseByUserId(userId);
+
         var Result = _mapper.Map<List<SaleCourseDetailsDto>>(data);
         return Ok(Result);
     }
 
-/*    [HttpGet]
-    [Route("api/users/{userId}/not-purchased-courses")]
-    public async Task<ActionResult<List<SaleCourseDetailsDto>>> GetNotPurchasedCoursesByUserId(int userId)
-{
-    var notpurchasedCourses = await _courseRepository.GetNotPurchasedCoursesByUserId(userId);
-  
 
-    var result = _mapper.Map<List<SaleCourseDetailsDto>>(notpurchasedCourses);
-    return Ok(result);
-}*/
+    /*    [HttpGet]
+        [Route("api/users/{userId}/not-purchased-courses")]
+        public async Task<ActionResult<List<SaleCourseDetailsDto>>> GetNotPurchasedCoursesByUserId(int userId)
+    {
+        var notpurchasedCourses = await _courseRepository.GetNotPurchasedCoursesByUserId(userId);
 
 
+        var result = _mapper.Map<List<SaleCourseDetailsDto>>(notpurchasedCourses);
+        return Ok(result);
+    }*/
 
 
+    [HttpGet]
+    [Route("api/courses/{userid}/up-coming-classes")]
 
-[HttpDelete]
+    public async Task<ActionResult> UpCommingClasses()
+    {
+        var data = await _courseRepository.GetUpcomingClasses(3);
+
+        if (data == null)
+        {
+            return NotFound("no data found ......");
+        }
+        return Ok(data);
+    }
+
+
+    [HttpDelete]
     [Route("api/courses/{id}")]
     public async Task<ActionResult> Delete(int id)
     {

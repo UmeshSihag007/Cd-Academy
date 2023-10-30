@@ -17,7 +17,6 @@ namespace Domain.Models.Courses.FeeDetails
         [ForeignKey("CourseFee")]
         public int? FeeId { get;set; }
         public CourseFee CourseFee { get; set; }
-
         public string Name { get; set; }
         public decimal Amount { get; set; }
         public decimal Discount { get; set; }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231028042303_blog-tables")]
-    partial class blogtables
+    [Migration("20231029133547_userlog-table")]
+    partial class userlogtable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1305,7 +1305,7 @@ namespace Data.Migrations
                     b.ToTable("UserDevices");
                 });
 
-            modelBuilder.Entity("Domain.Models.Users.Lectures.Logs.UserLectureLog", b =>
+            modelBuilder.Entity("Domain.Models.Users.Lectures.LectureLogs.UserLectureLogs", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1322,8 +1322,7 @@ namespace Data.Migrations
                     b.Property<DateTime>("To")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("UserLectureId")
-                        .IsRequired()
+                    b.Property<int>("UserLectureId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -2118,7 +2117,7 @@ namespace Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Domain.Models.Users.Lectures.Logs.UserLectureLog", b =>
+            modelBuilder.Entity("Domain.Models.Users.Lectures.LectureLogs.UserLectureLogs", b =>
                 {
                     b.HasOne("Domain.Models.Users.Lectures.UserLecture", "UserLecture")
                         .WithMany()
